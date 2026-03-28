@@ -1,4 +1,8 @@
 package com.trackIT.repository;
+import com.trackIT.model.StudentRoster;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-public interface StudentRosterRepository {
+@Repository
+public interface StudentRosterRepository extends JpaRepository<StudentRoster,Long>{
 }

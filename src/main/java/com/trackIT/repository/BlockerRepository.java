@@ -1,4 +1,8 @@
 package com.trackIT.repository;
+import com.trackIT.model.Blocker;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-public interface BlockerRepository {
+@Repository
+public interface BlockerRepository extends JpaRepository <Blocker, Long> {
 }

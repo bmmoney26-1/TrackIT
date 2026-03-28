@@ -1,4 +1,8 @@
 package com.trackIT.repository;
+import com.trackIT.model.ProgressReport;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-public interface ProgressReportRepository {
+@Repository
+public interface ProgressReportRepository extends JpaRepository<ProgressReport, Long>{
 }
