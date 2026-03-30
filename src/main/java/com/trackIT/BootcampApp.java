@@ -63,10 +63,14 @@ public class BootcampApp {
         return studentRepository.findById(id);
     }
 
-public Blocker createBlocker(Blocker blocker, Long id){
-    Optional<Student> blockerBelongsToo = getStudentById(id);
-blocker.setStudent(blockerBelongsToo.get());
-return blockerRepository.save(blocker);
-}
+    public Blocker createBlocker(Blocker blocker, Long id) {
+        Optional<Student> blockerBelongsToo = getStudentById(id);
+        blocker.setStudent(blockerBelongsToo.get());
+        return blockerRepository.save(blocker);
+    }
 
+    public List<Blocker> getStudentBlockers(Long id) {
+
+        return blockerRepository.findByStudentId(id);
+    }
 }
