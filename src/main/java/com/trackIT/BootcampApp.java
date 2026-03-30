@@ -1,7 +1,6 @@
 package com.trackIT;
 
-import com.trackIT.model.Blocker;
-import com.trackIT.model.Student;
+import com.trackIT.model.*;
 import com.trackIT.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -72,5 +71,25 @@ public class BootcampApp {
     public List<Blocker> getStudentBlockers(Long id) {
 
         return blockerRepository.findByStudentId(id);
+    }
+public LearningSession logLearningSession(LearningSession learningSession, Long id){
+Optional<Student> learningSessionBelongsToo = getStudentById(id);
+ learningSession.setStudent(learningSessionBelongsToo.get());
+        return learningSessionRepository.save(learningSession);
+}
+
+public Note createNote(Note note){
+
+        return noteRepository.save(note);
+}
+    public List<Assignment> getStudentAssignments(Long id) {
+
+        return assignmentRepository.findByStudentId(id);
+    }
+    public Assignment updateAssignmentStatus(Long id, String status){
+        Optional<Assignment> updateAssignmentStatusOf = assignmentRepository.findById(id);
+Assignment assignment = updateAssignmentStatusOf.get();
+        assignment.setStatus(status);
+return assignmentRepository.save(assignment);
     }
 }
