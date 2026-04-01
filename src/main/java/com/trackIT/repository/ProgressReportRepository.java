@@ -1,11 +1,9 @@
 package com.trackIT.repository;
 
-import com.trackIT.model.Student;
+import com.trackIT.model.ProgressReport;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface StudentRepository extends JpaRepository<Student, Long> {
-
-
+public interface ProgressReportRepository extends JpaRepository<ProgressReport, Long> {
 }
