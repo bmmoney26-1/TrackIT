@@ -92,4 +92,19 @@ Assignment assignment = updateAssignmentStatusOf.get();
         assignment.setStatus(status);
 return assignmentRepository.save(assignment);
     }
+
+    public void deleteBlocker(Long id) {
+        blockerRepository.deleteById(id);
+    }
+
+    public Blocker updateBlockerInfo(Blocker blocker) {
+        return blockerRepository.save(blocker);
+    }
+
+    public void deleteNote(Long id) {
+        noteRepository.deleteById(id);
+    }
+    public Note updateNoteInfo(Note note) {
+        return noteRepository.save(note);
+    }
 }
