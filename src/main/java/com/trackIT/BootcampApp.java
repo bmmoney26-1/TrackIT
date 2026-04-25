@@ -107,4 +107,17 @@ return assignmentRepository.save(assignment);
     public Note updateNoteInfo(Note note) {
         return noteRepository.save(note);
     }
+
+    public Optional<Note> getNoteById(Long id) {
+
+        return noteRepository.findById(id);
+    }
+
+    //Future implementation using complex queries
+//   public List<Note> getStudentNotes(Long id){
+//
+//        return noteRepository.findByStudentId(id);
+//   }
+
 }
+
