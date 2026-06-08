@@ -1,5 +1,7 @@
 package com.trackIT;
 
+import com.trackIT.exceptions.AssignmentNotFoundException;
+import com.trackIT.exceptions.StudentNotFoundException;
 import com.trackIT.model.*;
 import com.trackIT.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,15 +48,22 @@ public class BootcampApp {
         return studentRepository.findAll();
     }
 
-    public Optional<Student> getStudentById(Long id) {
-        return studentRepository.findById(id);
+    public Student getStudentById(Long id){
+        return studentRepository.findById(id)
+                .orElseThrow(() -> new StudentNotFoundException(id));
     }
 
-    public void deleteStudent(Long id) {
+    public void deleteStudent(Long id){
+        if (!studentRepository.existsById(id)){
+            throw new StudentNotFoundException(id);
+        }
         studentRepository.deleteById(id);
     }
 
-    public Student updateStudentInfo(Student student) {
+    public Student updateStudentInfo(Long id, Student student){
+        if (!studentRepository.existsById(id)){
+            throw new StudentNotFoundException(id);
+        }
         return studentRepository.save(student);
     }
 
@@ -63,8 +72,8 @@ public class BootcampApp {
     }
 
     public Blocker createBlocker(Blocker blocker, Long id) {
-        Optional<Student> blockerBelongsToo = getStudentById(id);
-        blocker.setStudent(blockerBelongsToo.get());
+        Student student = getStudentById(id);
+        blocker.setStudent(student);
         return blockerRepository.save(blocker);
     }
 
@@ -72,11 +81,11 @@ public class BootcampApp {
 
         return blockerRepository.findByStudentId(id);
     }
-public LearningSession logLearningSession(LearningSession learningSession, Long id){
-Optional<Student> learningSessionBelongsToo = getStudentById(id);
- learningSession.setStudent(learningSessionBelongsToo.get());
+    public LearningSession logLearningSession(LearningSession learningSession, Long id) {
+        Student student = getStudentById(id);
+        learningSession.setStudent(student);
         return learningSessionRepository.save(learningSession);
-}
+    }
 
 public Note createNote(Note note){
 
@@ -87,10 +96,10 @@ public Note createNote(Note note){
         return assignmentRepository.findByStudentId(id);
     }
     public Assignment updateAssignmentStatus(Long id, String status){
-        Optional<Assignment> updateAssignmentStatusOf = assignmentRepository.findById(id);
-Assignment assignment = updateAssignmentStatusOf.get();
+        Assignment assignment = assignmentRepository.findById(id)
+                .orElseThrow(() -> new AssignmentNotFoundException(id));
         assignment.setStatus(status);
-return assignmentRepository.save(assignment);
+        return assignmentRepository.save(assignment);
     }
 
     public void deleteBlocker(Long id) {

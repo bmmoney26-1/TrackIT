@@ -27,9 +27,9 @@ public class StudentController {
 
         return bootcampApp.createStudent(student);
     }
-@GetMapping("/{id}")
-    public Optional<Student> studentId(@PathVariable Long id){
-return bootcampApp.getStudentById(id);
+    @GetMapping("/{id}")
+    public Student studentId(@PathVariable Long id){
+        return bootcampApp.getStudentById(id);
     }
 
     @DeleteMapping("/{id}")
@@ -39,7 +39,7 @@ bootcampApp.deleteStudent(id);
 
     @PutMapping("/{id}")
     public Student updateStudent(@PathVariable Long id, @RequestBody Student student){
-        return bootcampApp.updateStudentInfo(student);
+        return bootcampApp.updateStudentInfo(id, student);
     }
 
     }
