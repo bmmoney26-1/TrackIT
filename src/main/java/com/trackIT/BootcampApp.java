@@ -86,6 +86,10 @@ public class BootcampApp {
         learningSession.setStudent(student);
         return learningSessionRepository.save(learningSession);
     }
+    public List<LearningSession> getStudentLearningSession(Long id) {
+
+        return learningSessionRepository.findByStudentId(id);
+    }
 
 public Note createNote(Note note){
 
